@@ -4,7 +4,7 @@ import (
 	"flag"
 	"github.com/BurntSushi/toml"
 
-	"github.com/donbalone/do-restapi-postgresql.git/internal/app/apiserver"
+	"github.com/DonBalone/Go-RestAPI-postgresql.git/internal/app/apiserver"
 	"log"
 )
 
