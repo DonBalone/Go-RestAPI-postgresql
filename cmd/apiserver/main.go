@@ -4,7 +4,8 @@ import (
 	"flag"
 	"fmt"
 	"github.com/DonBalone/Go-RestAPI-postgresql.git/internal/app/apiserver"
-	_ "github.com/lib/pq"
+
+	//_ "github.com/lib/pq"
 	"io/ioutil"
 	"log"
 )
@@ -27,24 +28,5 @@ func main() {
 	if err := s.Start(); err != nil {
 		log.Fatal(err)
 	}
-	/*// открытие бд
-	db, err := sql.Open("postgres", "user=username password=password dbname=db sslmode=disable")
-	if err != nil {
-		log.Fatalf("Error: Unable to connect to database: %v", err)
-
-	}
-	defer db.Close()
-	// выполнение запросов в бд
-	rows, err := db.Query("SELECT id, name FROM users")
-	if err != nil {
-		log.Fatalf("Error: Unable to execute query: %v", err)
-	}
-	defer rows.Close()
-	for rows.Next() {
-		var id int64
-		var name string
-		rows.Scan(&id, &name)
-		fmt.Printf("User ID: %d, Name: %s\n", id, name)
-	}*/
 
 }
