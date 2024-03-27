@@ -2,23 +2,22 @@ package main
 
 import (
 	"flag"
-	"github.com/BurntSushi/toml"
-
+	"fmt"
 	"github.com/DonBalone/Go-RestAPI-postgresql.git/internal/app/apiserver"
+	_ "github.com/lib/pq"
+	"io/ioutil"
 	"log"
-)
-
-var (
-	configPath string
 )
 
 func main() {
 	// разделяем флаги и получаем все значения для конфига
 	flag.Parse()
+	configPath := "configs/apiserver.yaml"
 	// создание нового конфига
 	config := apiserver.NewConfig()
 
-	_, err := toml.DecodeFile(configPath, config)
+	fmt.Println(config)
+	_, err := ioutil.ReadFile(configPath)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -28,9 +27,24 @@ func main() {
 	if err := s.Start(); err != nil {
 		log.Fatal(err)
 	}
-}
+	/*// открытие бд
+	db, err := sql.Open("postgres", "user=username password=password dbname=db sslmode=disable")
+	if err != nil {
+		log.Fatalf("Error: Unable to connect to database: %v", err)
 
-// создание флага, который получает путь к конфигу
-func init() {
-	flag.StringVar(&configPath, "config-path", "configs/apiserver.toml", "path to config file")
+	}
+	defer db.Close()
+	// выполнение запросов в бд
+	rows, err := db.Query("SELECT id, name FROM users")
+	if err != nil {
+		log.Fatalf("Error: Unable to execute query: %v", err)
+	}
+	defer rows.Close()
+	for rows.Next() {
+		var id int64
+		var name string
+		rows.Scan(&id, &name)
+		fmt.Printf("User ID: %d, Name: %s\n", id, name)
+	}*/
+
 }

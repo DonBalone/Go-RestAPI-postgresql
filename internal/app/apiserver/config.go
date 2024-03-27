@@ -2,14 +2,19 @@ package apiserver
 
 // параметры конфига
 type Config struct {
-	BindAddr string `toml:"bind_addr"`
-	LogLevel string `toml:"log_level"`
+	LogLevel   string `yaml:"log_level" env-default:"debug"`
+	HTTPServer `yaml:"http_server"`
+}
+type HTTPServer struct {
+	Address string `yaml:"address" env-default:"localhost:8080"`
 }
 
 // создание нового конфига
 func NewConfig() *Config {
 	return &Config{
-		BindAddr: ":8080",
+		HTTPServer: HTTPServer{
+			Address: "localhost:8080",
+		},
 		LogLevel: "debug",
 	}
 }

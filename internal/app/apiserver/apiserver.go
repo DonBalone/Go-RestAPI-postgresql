@@ -33,7 +33,7 @@ func (s *APIServer) Start() error {
 
 	s.logger.Info("Starting API server")
 
-	return http.ListenAndServe(s.config.BindAddr, s.router)
+	return http.ListenAndServe(s.config.HTTPServer.Address, s.router)
 }
 
 // создание логгера на указанном уровне
@@ -50,7 +50,7 @@ func (s *APIServer) configureLogger() error {
 
 // создание роутера
 func (s *APIServer) configureRouter() {
-	s.router.HandleFunc("/hello", s.handleHello())
+	s.router.HandleFunc("/huesosina", s.handleHello())
 }
 
 func (s *APIServer) handleHello() http.HandlerFunc {
