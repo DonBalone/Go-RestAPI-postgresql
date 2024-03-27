@@ -9,5 +9,7 @@ type Config struct {
 }*/
 
 func NewConfig() *Config {
-	return &Config{}
+	return &Config{
+		Storage: "host=localhost port=5432 sslmode=disable dbname=restapi_dev password=12345 user=postgres",
+	}
 }

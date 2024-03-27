@@ -3,10 +3,11 @@ package main
 import (
 	"flag"
 	"fmt"
+	"io/ioutil"
+
 	"github.com/DonBalone/Go-RestAPI-postgresql.git/internal/app/apiserver"
 
 	//_ "github.com/lib/pq"
-	"io/ioutil"
 	"log"
 )
 

@@ -9,7 +9,7 @@ type Config struct {
 	Store      *store.Config
 }
 type HTTPServer struct {
-	Address string `yaml:"address" env-default:"localhost:8080"`
+	Address string `yaml:"address"`
 }
 
 // создание нового конфига
