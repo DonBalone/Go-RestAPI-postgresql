@@ -8,14 +8,16 @@ import (
 // это сущность хранилища, которая
 // скрывает все детали реализации
 type Store struct {
-	config *Config
-	db     *sql.DB
+	config         *Config
+	db             *sql.DB
+	userRepository *UserRepository
 }
 
 func New(config *Config) *Store {
 	return &Store{
 		config: config,
 	}
+
 }
 
 // нужен для инициализации
@@ -45,4 +47,16 @@ func (s *Store) Close() {
 
 func (s *Store) Config() {
 	s.db.Close()
+}
+
+func (s *Store) User() *UserRepository {
+	if s.userRepository != nil {
+		return s.userRepository
+	}
+
+	s.userRepository = &UserRepository{
+		store: s,
+	}
+
+	return s.userRepository
 }
