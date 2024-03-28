@@ -1,6 +1,11 @@
 package apiserver
 
-import "github.com/DonBalone/Go-RestAPI-postgresql.git/internal/app/store"
+import (
+	"github.com/DonBalone/Go-RestAPI-postgresql.git/internal/app/store"
+	"github.com/ilyakaznacheev/cleanenv"
+	"log"
+	"os"
+)
 
 // параметры конфига
 type Config struct {
@@ -14,11 +19,17 @@ type HTTPServer struct {
 
 // создание нового конфига
 func NewConfig() *Config {
-	return &Config{
-		LogLevel: "debug",
-		Store:    store.NewConfig(),
-		HTTPServer: HTTPServer{
-			Address: "localhost:8080",
-		},
+	configPath := os.Getenv("CONFIG_PATH")
+	if configPath == "" {
+		log.Fatal("CONFIG_PATH is not set")
 	}
+	var cfg Config
+
+	if err := cleanenv.ReadConfig(configPath, &cfg); err != nil {
+		log.Fatalf("cannot read config: %s", err)
+	}
+
+	cfg.Store = store.NewConfig()
+	return &cfg
+
 }

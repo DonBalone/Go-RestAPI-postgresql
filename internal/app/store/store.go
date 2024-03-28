@@ -21,7 +21,8 @@ func New(config *Config) *Store {
 // нужен для инициализации
 // хранилища, при подключении к бд
 func (s *Store) Open() error {
-	db, err := sql.Open("postgres", s.config.Storage)
+
+	db, err := sql.Open("postgres", s.config.StorageInfo)
 
 	if err != nil {
 		return err

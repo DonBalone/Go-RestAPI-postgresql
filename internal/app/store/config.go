@@ -1,15 +1,35 @@
 package store
 
+import (
+	"gopkg.in/yaml.v3"
+	"log"
+	"os"
+)
+
 type Config struct {
-	Storage string `yaml:"storage_path"`
+	StorageInfo string `yaml:"storage_info"`
 }
 
-/*type Storage struct {
-	storageURL string `yaml:"storage_path"`
-}*/
-
 func NewConfig() *Config {
+	configPath := os.Getenv("CONFIG_PATH")
+	data, err := os.ReadFile(configPath)
+	if err != nil {
+		log.Fatalf("error reading YAML file: %v", err)
+	}
+
+	var config map[string]interface{}
+	err = yaml.Unmarshal(data, &config)
+	if err != nil {
+		log.Fatalf("error unmarshalling YAML: %v", err)
+	}
+
+	// Получение значения username из YAML файла и запись его в переменную Username
+	StorageInfo, ok := config["storage_info"].(string)
+	if !ok {
+		log.Fatalf("storage_info is not a string")
+	}
+
 	return &Config{
-		Storage: "host=localhost port=5432 sslmode=disable dbname=restapi_dev password=12345 user=postgres",
+		StorageInfo: StorageInfo,
 	}
 }
