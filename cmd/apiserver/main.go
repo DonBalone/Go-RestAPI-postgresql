@@ -17,11 +17,10 @@ func main() {
 	fmt.Println(config)
 
 	// создание нового сервера
-	s := apiserver.New(config)
 
 	//"postgres://postgres:12345@localhost:5432/restapi_dev?sslmode=disable"
 	// если есть ошибка в запуске сервера
-	if err := s.Start(); err != nil {
+	if err := apiserver.Start(config); err != nil {
 		log.Fatal(err)
 	}
 

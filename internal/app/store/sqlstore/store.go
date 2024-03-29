@@ -2,6 +2,7 @@ package sqlstore
 
 import (
 	"database/sql"
+	"github.com/DonBalone/Go-RestAPI-postgresql.git/internal/app/store"
 	_ "github.com/lib/pq"
 )
 
@@ -19,7 +20,7 @@ func New(db *sql.DB) *Store {
 
 }
 
-func (s *Store) User() *UserRepository {
+func (s *Store) User() store.UserRepository {
 	if s.userRepository != nil {
 		return s.userRepository
 	}

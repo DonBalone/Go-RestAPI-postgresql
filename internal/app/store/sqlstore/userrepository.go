@@ -1,7 +1,9 @@
 package sqlstore
 
 import (
+	"database/sql"
 	"github.com/DonBalone/Go-RestAPI-postgresql.git/internal/app/model"
+	"github.com/DonBalone/Go-RestAPI-postgresql.git/internal/app/store"
 )
 
 type UserRepository struct {
@@ -35,6 +37,9 @@ func (r *UserRepository) FindByEmail(email string) (*model.User, error) {
 		&u.Email,
 		&u.EncryptedPassword,
 	); err != nil {
+		if err == sql.ErrNoRows {
+			return nil, store.ErrRecordNotFound
+		}
 		return nil, err
 	}
 	return u, nil

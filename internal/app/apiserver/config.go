@@ -1,7 +1,6 @@
 package apiserver
 
 import (
-	"github.com/DonBalone/Go-RestAPI-postgresql.git/internal/app/store"
 	"github.com/ilyakaznacheev/cleanenv"
 	"log"
 	"os"
@@ -9,9 +8,9 @@ import (
 
 // параметры конфига
 type Config struct {
-	LogLevel   string `yaml:"log_level"`
-	HTTPServer `yaml:"http_server"`
-	Store      *store.Config
+	LogLevel    string `yaml:"log_level"`
+	HTTPServer  `yaml:"http_server"`
+	StorageInfo string `yaml:"storage_info"`
 }
 type HTTPServer struct {
 	Address string `yaml:"address"`
@@ -29,7 +28,6 @@ func NewConfig() *Config {
 		log.Fatalf("cannot read config: %s", err)
 	}
 
-	cfg.Store = store.NewConfig()
 	return &cfg
 
 }

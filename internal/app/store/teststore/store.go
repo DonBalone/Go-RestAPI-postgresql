@@ -2,7 +2,7 @@ package teststore
 
 import (
 	"github.com/DonBalone/Go-RestAPI-postgresql.git/internal/app/model"
-	_ "github.com/lib/pq"
+	"github.com/DonBalone/Go-RestAPI-postgresql.git/internal/app/store"
 )
 
 // это сущность хранилища, которая
@@ -12,9 +12,10 @@ type Store struct {
 }
 
 func New() *Store {
+	return &Store{}
 }
 
-func (s *Store) User() *UserRepository {
+func (s *Store) User() store.UserRepository {
 	if s.userRepository != nil {
 		return s.userRepository
 	}
