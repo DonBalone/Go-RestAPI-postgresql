@@ -2,7 +2,7 @@ package teststore_test
 
 import (
 	"github.com/DonBalone/Go-RestAPI-postgresql.git/internal/app/model"
-	"github.com/DonBalone/Go-RestAPI-postgresql.git/internal/app/store/sqlstore/teststore"
+	"github.com/DonBalone/Go-RestAPI-postgresql.git/internal/app/store/teststore"
 	"github.com/stretchr/testify/assert"
 	"testing"
 )
