@@ -11,6 +11,7 @@ type Config struct {
 	LogLevel    string `yaml:"log_level"`
 	HTTPServer  `yaml:"http_server"`
 	StorageInfo string `yaml:"storage_info"`
+	sessionKey  string `yaml:"session_key"`
 }
 type HTTPServer struct {
 	Address string `yaml:"address"`

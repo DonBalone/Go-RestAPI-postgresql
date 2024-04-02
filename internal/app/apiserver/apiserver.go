@@ -3,6 +3,7 @@ package apiserver
 import (
 	"database/sql"
 	"github.com/DonBalone/Go-RestAPI-postgresql.git/internal/app/store/sqlstore"
+	"github.com/gorilla/sessions"
 	"net/http"
 )
 
@@ -12,9 +13,10 @@ func Start(config *Config) error {
 		return err
 	}
 	defer db.Close()
-
+	//config.sessionKey = "81099f8b6b5e4b0e8c486b5e4b0e8c48"
 	store := sqlstore.New(db)
-	s := newServer(store)
+	sessionStore := sessions.NewCookieStore([]byte(config.sessionKey))
+	s := newServer(store, sessionStore)
 	return http.ListenAndServe(config.HTTPServer.Address, s)
 }
 

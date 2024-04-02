@@ -2,3 +2,4 @@ log_level: "debug"
 storage_info: "host=localhost port=5432 sslmode=disable dbname=restapi_dev password=12345 user=postgres"
 http_server:
   address: "localhost:8080"
+session_key: "81099f8b6b5e4b0e8c486b5e4b0e8c48"
