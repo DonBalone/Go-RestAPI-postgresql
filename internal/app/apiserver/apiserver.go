@@ -13,7 +13,7 @@ func Start(config *Config) error {
 		return err
 	}
 	defer db.Close()
-	//config.sessionKey = "81099f8b6b5e4b0e8c486b5e4b0e8c48"
+	config.sessionKey = "81099f8b6b5e4b0e8c486b5e4b0e8c48"
 	store := sqlstore.New(db)
 	sessionStore := sessions.NewCookieStore([]byte(config.sessionKey))
 	s := newServer(store, sessionStore)
